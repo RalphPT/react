@@ -32,22 +32,26 @@
 //     </div>
 //   )
 // }
-import { useState } from "react";
-import Header from "./components/Header";
-import Footer from "./components/Footer";
-import './App.css';
+
+
+// import { useState } from "react";
+// import Header from "./components/Header";
+// import Footer from "./components/Footer";
+import Form from "./components/Form";
+// import './App.css';
 
 export default function App() {
-  const [nombre, setNombre] = useState("Rafaelo");
+  // const [nombre, setNombre] = useState("Rafaelo");
 
-  const [age, setAge] = useState(101);
+  // const [age, setAge] = useState(101);
 
-  const handleInputChange = (e) =>{
-    setNombre(e.target.value)
-  };
+  // const handleInputChange = (e) =>{
+  //   setNombre(e.target.value)
+  // };
   return (
     <div className="App">
-      <Header nombre="Rafael" apellido="Percca" dni="12345678" />
+      <Form />
+      {/* <Header nombre="Rafael" apellido="Percca" dni="12345678" />
       <h1>{nombre}</h1>
       <input type="text" value={nombre} onChange= {handleInputChange} />
       <div>
@@ -60,7 +64,7 @@ export default function App() {
         referencia="Al lado de keti"
         correo="ralph@gmail.com"
         linkedin="https://linkedin.com/in/Ralph"
-      />
+      /> */}
     </div>
   );
 }
