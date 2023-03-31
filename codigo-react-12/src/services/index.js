@@ -12,9 +12,20 @@ export const post = async (body) => {
         });
 
         if (!response.ok) {
-            alert("Hubo un error inesperado");
-            return;
+            // alert("Hubo un error inesperado");
+            return false;
         }
+        const data = await response.json();
+        return data;
+    } catch (error) {
+        console.error(error);
+    }
+};
+
+export const get = async () => {
+    try {
+        const response = await fetch(url);
+        if (!response.ok) throw new Error("No hubo respuesta");
         const data = await response.json();
         return data;
     } catch (error) {

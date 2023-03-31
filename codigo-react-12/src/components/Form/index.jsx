@@ -1,6 +1,7 @@
 //import React, { useState } from "react";
 import { useState } from "react";
 import { post } from "../../services";
+import Swal from "sweetalert2"; //02H:24' NECESARIO VER
 
 export default function Form() {
     const [inputData, setInputData] = useState({
@@ -10,10 +11,12 @@ export default function Form() {
         terms: false,
     });
 
+    const [showValidation, setShowValidation] = useState("");
+
     //ONCHANGE
     const handleInputChange = (event) => {
         //event.target = <input name="email" value="ralph@gmail.com" type="email" />
-        console.log(event.target.value)
+        // console.log(event.target.value)
         //otra manera, destructuración de objetos:
         const { name, type, checked, value } = event.target;
         setInputData({
@@ -30,54 +33,93 @@ export default function Form() {
 
     const handleSubmit = async (event) => {
         event.preventDefault();
+        // antes de enviar la información debemos verificar que los campos esten llenos
+        // let isValidate = Object.values(inputData).every((value) => value);
+        setShowValidation("was-validated");
+
+        // console.log(isValidate)
         const data = await post(inputData);
-        console.log(data);
-    }
+        // console.log(data);
+
+        if (!data) {
+            Swal.fire({
+                title: "Todo Mal",
+                text: "Hubo un error",
+                icon: "error",
+            });
+            return;
+        }
+
+        Swal.fire({
+            title: "Todo ok",
+            text: "Usuario creado correctamente",
+            icon: "success",
+        });
+    };
 
     return (
         <div className="container mt-5">
             <div className="card">
                 <div className="card-body">
-                    <h2 className="mt-5">Formulario</h2>
-                    <form onSubmit={handleSubmit}>
+                    <h2>Formulario</h2>
+                    <form
+                        className={`needs-validation ${showValidation}`}
+                        onSubmit={handleSubmit}
+                        noValidate
+                    >
                         <div>
                             <input
+                                required
                                 value={inputData.name}
                                 className="form-control mt-3"
                                 placeholder="Write your name"
                                 type="text"
                                 onChange={handleInputChange}
-                                name="name" />
+                                name="name"
+                            />
                         </div>
+                        <div class="valid-feedback">Bien hecho</div>
                         <div>
                             <input
+                                required
                                 value={inputData.email}
                                 className="form-control mt-3"
                                 placeholder="Write your email"
                                 type="email"
                                 onChange={handleInputChange}
-                                name="email" />
+                                name="email"
+                            />
                         </div>
                         <div>
                             <input
+                                required
                                 value={inputData.password}
                                 className="form-control mt-3"
                                 placeholder="Write your password"
                                 type="password"
                                 onChange={handleInputChange}
-                                name="password" />
+                                name="password"
+                            />
                         </div>
-                        <div>
+                        <div className="mt-3">
                             <input
-                                className="mt-3"
-                                checked={inputData.terms} //Para los checkbox, radiobuttons
+                                id="invalidCheck"
+                                required
+                                className="form-check-input"
+                                checked={inputData.terms} //checkbox, radiobuttons
                                 value={inputData.terms}
                                 type="checkbox"
                                 onChange={handleInputChange}
-                                name="terms" />¿Acepta los terminos y condiciones?
+                                name="terms"
+                            />{" "}
+                            <label class="form-check-label" htmlFor="invalidCheck">
+                                Acepta los terminos y condiciones?
+                            </label>
                         </div>
                         <div>
-                            <button className="mt-3 btn btn-primary" type="submit">Guardar</button>
+                            <button className="mt-3 btn btn-primary" type="submit">
+                                Guardar
+                            </button>
                         </div>
                     </form>
                 </div>
