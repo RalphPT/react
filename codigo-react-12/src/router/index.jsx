@@ -1,9 +1,9 @@
-import {BrowserRouter, Routes, Route} from "react-router-dom";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Home from "../pages/home";
 import SignUp from "../pages/SignUp";
 
-export default function Router(){
-    return(
+export default function Router() {
+    return (
         <BrowserRouter>
             <Routes>
                 <Route path="/" element={<Home />} />

@@ -37,9 +37,9 @@
 // import { useState } from "react";
 // import Header from "./components/Header";
 // import Footer from "./components/Footer";
-import Form from "./components/Form";
-// import Router from "./router";
-import './App.css';
+//import Form from "./components/Form";
+import Router from "./router";
+//import './App.css';
 
 export default function App() {
   // const [nombre, setNombre] = useState("Rafaelo");
@@ -51,8 +51,8 @@ export default function App() {
   // };
   return (
     <div className="App">
-      <Form />
-      {/* <Router /> */}
+      {/* <Form /> */}
+      <Router />
       {/* <Header nombre="Rafael" apellido="Percca" dni="12345678" />
       <h1>{nombre}</h1>
       <input type="text" value={nombre} onChange= {handleInputChange} />

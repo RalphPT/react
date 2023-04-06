@@ -2,7 +2,7 @@ const url = "https://641523a54f32ca32918f7bb9.mockapi.io/users"
 
 export const post = async (body) => {
     try {
-        //dentro del try va a intentar hacer algo, si ese algo falla entra al catch
+        // dentro del try va a intentar hacer algo, si ese algo falla entra al catch
         const response = await fetch(url, {
             method: "POST",
             headers: {
@@ -11,11 +11,11 @@ export const post = async (body) => {
             body: JSON.stringify(body),
         });
 
-        if (!response.ok) {
-            // alert("Hubo un error inesperado");
-            return false;
-        }
+        if (!response.ok) return false;
+        // alert("Hubo un error inesperado");
+
         const data = await response.json();
+
         return data;
     } catch (error) {
         console.error(error);
@@ -25,8 +25,31 @@ export const post = async (body) => {
 export const get = async () => {
     try {
         const response = await fetch(url);
-        if (!response.ok) throw new Error("No hubo respuesta");
+
+        if (!response.ok) return false;
+
         const data = await response.json();
+
+        return data;
+    } catch (error) {
+        console.error(error);
+    }
+};
+
+export const put = async (id, body) => {
+    try {
+        const response = await fetch(`${url}/${id}`, {
+            method: "PUT",
+            headers: {
+                "content-type": "application/json",
+            },
+            body: JSON.stringify(body),
+        });
+
+        if (!response.ok) return false;
+
+        const data = await response.json();
+
         return data;
     } catch (error) {
         console.error(error);
